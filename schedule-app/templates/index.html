@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>スケジュール管理</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>スケジュール一覧</h1>
+      <a href="{{ url_for('add') }}" class="btn btn-primary mb-3">新規追加</a>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>タイトル</th>
+            <th>日付</th>
+            <th>説明</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for schedule in schedules %}
+          <tr>
+            <td>{{ schedule.title }}</td>
+            <td>{{ schedule.date }}</td>
+            <td>{{ schedule.description }}</td>
+            <td>
+              <a
+                href="{{ url_for('edit', id=schedule.id) }}"
+                class="btn btn-sm btn-primary"
+                >編集</a
+              >
+              <a
+                 href="{{ url_for('delete', id=schedule.id) }}"
+                class="btn btn-sm btn-danger"
+                onclick="return confirm('本当に削除しますか？')"
+                >削除</a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
